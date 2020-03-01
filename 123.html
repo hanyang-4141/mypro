@@ -1,0 +1,420 @@
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<base href="http://10.33.2.11:8888/bfs_report/">
+
+		<title>缺陷详细信息</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+		<style type="text/css">
+			*{font-size:12px;}
+			.table-c table{border-right:1px solid;border-bottom:1px solid;} 
+			.table-c table td{border-left:1px solid;border-top:1px solid;}
+		</style>
+
+		<script type="text/javascript"
+			src="http://10.33.2.11:8888/bfs_report//js/MyDatePicker/WdatePicker.js"></script>
+
+		<SCRIPT LANGUAGE="JavaScript"> 
+		  function autoRowSpan(tb,row,col){ 
+		      var lastValue=""; 
+		      var value=""; 
+		      var pos=1; 
+		      for(var i=row;i<tb.rows.length;i++){ 
+		          value = tb.rows[i].cells[col].innerText; 
+		          if(lastValue == value){ 
+		              tb.rows[i].deleteCell(col); 
+		              tb.rows[i-pos].cells[col].rowSpan = tb.rows[i-pos].cells[col].rowSpan+1; 
+		              pos++; 
+		          }else{ 
+		              lastValue = value; 
+		              pos=1; 
+		          } 
+		      } 
+		  } 
+		</SCRIPT>
+		
+		
+		
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" language="javascript">
+        var idTmr;
+        function  getExplorer() {
+            var explorer = window.navigator.userAgent ;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if(explorer.indexOf("Chrome") >= 0){
+                return 'Chrome';
+            }
+            //Opera
+            else if(explorer.indexOf("Opera") >= 0){
+                return 'Opera';
+            }
+            //Safari
+            else if(explorer.indexOf("Safari") >= 0){
+                return 'Safari';
+            }
+        }
+        function method1(tableid) {//整个表格拷贝到EXCEL中
+            if(getExplorer()=='ie')
+            {
+                var curTbl = document.getElementById(tableid);
+                var oXL = new ActiveXObject("Excel.Application");
+                 
+                //创建AX对象excel
+                var oWB = oXL.Workbooks.Add();
+                //获取workbook对象
+                var xlsheet = oWB.Worksheets(1);
+                //激活当前sheet
+                var sel = document.body.createTextRange();
+                sel.moveToElementText(curTbl);
+                //把表格中的内容移到TextRange中
+                sel.select();
+                //全选TextRange中内容
+                sel.execCommand("Copy");
+                //复制TextRange中内容 
+                xlsheet.Paste();
+                //粘贴到活动的EXCEL中      
+                oXL.Visible = true;
+                //设置excel可见属性
+ 
+                try {
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+                } catch (e) {
+                    print("Nested catch caught " + e);
+                } finally {
+                    oWB.SaveAs(fname);
+ 
+                    oWB.Close(savechanges = false);
+                    //xls.visible = false;
+                    oXL.Quit();
+                    oXL = null;
+                    //结束excel进程，退出完成
+                    //window.setInterval("Cleanup();",1);
+                    idTmr = window.setInterval("Cleanup();", 1);
+ 
+                }
+            }
+            else
+            {
+                tableToExcel(tableid)
+            }
+        }
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function() {
+              var uri = 'data:application/vnd.ms-excel;base64,',
+              template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="Content-Type" charset=utf-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+                base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g,
+                    function(m, p) { return c[p]; }) }
+                return function(table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+              }
+            })()
+</script>
+		
+
+	</head>
+
+	<body onload="autoRowSpan(tb,0,0)">
+		<div class="table-c" >
+			<table id="tb" border="0" cellpadding="0" cellspacing="0" >
+				<tr align="center">
+					<td colspan="11" >
+						<span style="font-size: 24px; font-weight: bold;">
+							呼和浩特热电厂缺陷详细信息 </span>
+					</td>
+					 <td><input id="Button1" type="button" value="导出EXCEL" onclick="javascript:method1('tb')" style="padding:5px;margin-top:20px;"/></td>
+ 
+					<td>
+						<a href="javascript:void(history.back())"> 返回 </a>
+					</td>
+				</tr>
+				<tr align="center" height="27px">
+					<td width="3%">
+						序号
+					</td>
+					<td width="8%">
+						检修班组
+					</td>
+					<td width="4%">
+						缺陷单号
+					</td>
+					<td width="25%">
+						缺陷描述
+					</td>
+					<td width="9%">
+						措施说明
+					</td>
+					<td width="3%">
+						状态
+					</td>
+					<td width="6%">
+						状态描述
+					</td>
+					<td width="10%">
+						登记时间
+					</td>
+					<td width="10%">
+						完成时间
+					</td>
+					<td width="4%">
+						登记人
+					</td>
+					<td width="8%">
+						机组
+					</td>
+					<td width="5%">
+						缺陷类型
+					</td>
+					<td width="5%">
+						运行班组
+					</td>
+				</tr>
+				
+					<tr align="center" height="21px">
+						<td>
+							1
+						</td>
+						<td >
+							电气-保护
+						</td>
+						<td>
+							883
+						</td>
+						<td align="left">
+							35万机组#4机380V空冷岛PCⅣC段#1工作电源进线开关44KLC保护屏不显示数据。
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							80
+						</td>
+						<td>
+							验收合格
+						</td>
+						<td>
+							2020-02-03  08:03
+						</td>
+						<td>
+							2020-02-03 10:34
+						</td>
+						<td>
+							苗岩
+						</td>
+						<td>
+							科林新#4机组
+						</td>
+						<td>
+							三类缺陷
+						</td>
+						<td>
+							一值
+						</td>
+					</tr>
+				
+					<tr align="center" height="21px">
+						<td>
+							2
+						</td>
+						<td >
+							电气-保护
+						</td>
+						<td>
+							862
+						</td>
+						<td align="left">
+							350万机组#1辅机循环泵变频器故障。
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							80
+						</td>
+						<td>
+							验收合格
+						</td>
+						<td>
+							2020-02-02  06:27
+						</td>
+						<td>
+							2020-02-05 12:11
+						</td>
+						<td>
+							李洪军
+						</td>
+						<td>
+							科林公用
+						</td>
+						<td>
+							三类缺陷
+						</td>
+						<td>
+							四值
+						</td>
+					</tr>
+				
+					<tr align="center" height="21px">
+						<td>
+							3
+						</td>
+						<td >
+							电气-保护
+						</td>
+						<td>
+							857
+						</td>
+						<td align="left">
+							#4机组发变组保护A柜发“转子一点接地”报警（2月1日18:28电阻24704欧，23:42电阻18176欧，呈下降趋势），已复位。
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							28
+						</td>
+						<td>
+							挂起批准
+						</td>
+						<td>
+							2020-02-02  01:08
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							田国强
+						</td>
+						<td>
+							科林新#4机组
+						</td>
+						<td>
+							三类缺陷
+						</td>
+						<td>
+							二值
+						</td>
+					</tr>
+				
+					<tr align="center" height="21px">
+						<td>
+							4
+						</td>
+						<td >
+							电气-保护
+						</td>
+						<td>
+							841
+						</td>
+						<td align="left">
+							35万#4机空冷段，4号机380V空冷岛PC C段1号柜电压显示屏故障。
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							80
+						</td>
+						<td>
+							验收合格
+						</td>
+						<td>
+							2020-02-01  09:05
+						</td>
+						<td>
+							2020-02-01 15:28
+						</td>
+						<td>
+							韩文愈
+						</td>
+						<td>
+							科林新#4机组
+						</td>
+						<td>
+							三类缺陷
+						</td>
+						<td>
+							五值
+						</td>
+					</tr>
+				
+					<tr align="center" height="21px">
+						<td>
+							5
+						</td>
+						<td >
+							电气-保护
+						</td>
+						<td>
+							781
+						</td>
+						<td align="left">
+							35万机组励磁系统#4机可控硅#1整流屏峰压吸收指示灯不亮。
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							28
+						</td>
+						<td>
+							挂起批准
+						</td>
+						<td>
+							2020-01-29  06:01
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							田国强
+						</td>
+						<td>
+							科林新#4机组
+						</td>
+						<td>
+							三类缺陷
+						</td>
+						<td>
+							二值
+						</td>
+					</tr>
+				
+			</table>
+			</form>
+		</div>
+		
+		
+			
+		
+
+		
+	</body>
+</html>
